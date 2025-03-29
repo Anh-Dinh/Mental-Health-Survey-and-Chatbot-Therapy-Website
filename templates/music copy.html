@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="en"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="MusicStation">
+    <meta name="description" content="">
+    <title>Music</title>
+
+    <meta name="generator" content="Nicepage 6.4.4, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nicepage_music.css') }}" media="screen">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/music.css') }}" media="screen">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu-bar.css') }}" media="screen">
+    
+
+    
+    <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='javascript/jquery-1.9.1.min_music.js') }}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='javascript/nicepage_music.js') }}" defer=""></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- APlayer CSS -->
+	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css"/>
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": ""
+}</script>
+
+<style>
+		/*default is hide music player*/
+		#aplayer{
+			position: fixed;
+			bottom: -100%;
+			left: 0;
+			width: 100%;
+			margin: 0;
+			box-shadow: 0 -2px 2px #dadada;
+			background-color: #fff;
+			transition: all ease 0.5s;
+		}
+		#aplayer.showPlayer{
+			bottom: 0;
+		}
+
+		
+		/*MUSIC PLAYER CUSTOMIZING STYLE*/
+		span{
+			color: #000 !important;
+			font-size: 16px;
+		}
+		.aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-loaded{
+			background: #e0e0e0;
+    		height: 4px;
+		}
+		.aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played{
+			height: 4px;
+			background-color: #2196F3 !important;
+		}
+		.aplayer .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-played .aplayer-thumb{
+			background-color: #2196F3 !important;
+		}
+
+		.aplayer .aplayer-icon{
+			width: 20px;
+			height: 20px;
+		}
+		.aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path {
+		    fill: #000;
+		}
+		.aplayer .aplayer-info .aplayer-music{
+			margin-bottom: 5px;
+		}
+
+    .listen {
+
+      
+      display: inline-block;
+                outline: 0;
+                border:0;
+                cursor: pointer;
+                text-decoration: none;
+                position: relative;
+                color: #000;
+                background: #fff;
+                line-height: 30px;
+                border-radius: 40px;
+                margin-top: 20px;
+                padding: 5px;
+                font-size: 20px;
+                font-weight: 600;
+                box-shadow: rgb(255, 198, 0) -2px -2px 0px 2px, rgb(246, 84, 174) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
+                transition: all 0.2s;
+                :hover{
+                    box-shadow: rgb(246, 84, 174) -2px -2px 0px 2px, rgb(255, 198, 0) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
+                    transform: scale(1.01);
+                }
+                
+    }
+
+    
+
+</style>
+
+
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="About">
+    <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
+ 
+ 
+ 
+ <header>
+
+</header> 
+
+ 
+  <body data-path-to-root="./" data-include-products="false" class="u-body u-gradient u-xl-mode" data-lang="en" style="background-image: linear-gradient(#e9f2fa, #fef9e6);">
+    <nav class = 'menu'>
+      <a href="{{url_for('index')}}">Home</a>
+      <a href="{{url_for('survey_main')}}" >Survey</a>
+      <a href="{{url_for('chatbot')}}">Chatbot</a>
+      <a href="{{url_for('music')}}">Music</a>
+      <a href="{{url_for('survey_intro')}}">Dashboard</a>
+      <a href="{{url_for('aboutus')}}">About us</a>
+      
+      <div class="animation start-home"></div>
+    </nav>
+    
+    <section class="u-align-left u-clearfix u-section-1" id="carousel_1ceb">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="custom-expanded data-layout-selected u-align-left u-clearfix u-gutter-0 u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-container-style u-image u-image-round u-layout-cell u-radius u-right-cell u-size-30 u-image-1" data-image-width="736" data-image-height="1308">
+       <!---->         <div class="u-container-layout u-valign-bottom-lg u-valign-bottom-md u-valign-bottom-sm u-valign-bottom-xl u-container-layout-1"></div>
+              </div>
+              <div class="u-align-center u-container-style u-layout-cell u-left-cell u-palette-5-light-3 u-shape-rectangle u-size-30 u-layout-cell-2">
+                <div class="u-container-layout u-container-layout-2">
+                  <h1 class="u-custom-font u-font-merriweather u-text u-text-palette-5-dark-3 u-text-1">Music<br>Station
+                  </h1>
+                  <h4 class="u-text u-text-2"><span class="u-file-icon u-icon u-icon-1"><img src="{{ url_for('static', filename='images/461146.png') }}" alt=""></span>&nbsp;​Get refresh &amp; stay positive with our piano music 
+                  </h4>
+
+                  <button class="album-poster listen"> Listen </button>
+                  
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+  
+
+    </section>
+
+
+   
+    <div id="aplayer" style="overflow-y: auto; max-height: 300px;"></div>
+    
+    
+<!-- Jquery Link -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<!-- Bootstrap Link -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!-- APlayer Jquery link -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js"></script>	
+
+<script>
+
+
+  // NOW I CLICK album-poster TO GET CURRENT SONG ID
+  $(".album-poster").on('click', function(e){
+    var dataSwitchId = $(this).attr('data-switch');
+    //console.log(dataSwitchId);
+
+    // and now i use aplayer switch function see
+    ap.list.switch(dataSwitchId); //this is static id but i use dynamic 
+
+    // aplayer play function
+    // when i click any song to play
+    ap.play();
+
+    // click to slideUp player see
+    $("#aplayer").addClass('showPlayer');
+  });
+
+  const ap = new APlayer({
+      container: document.getElementById('aplayer'),
+      listFolded: true,
+      audio: [
+      {
+          name: 'Slow Smooth Piano Jazz',
+          artist: 'Musicians',
+          url: '../static/audio/slow_smooth_piano_jazz.mp3',
+          cover: '../static/images/tixung.jpeg'
+      },
+    {
+          name: 'Piano Ghibli Collection',  // SONG NAME
+          artist: 'Ghibli', //ARTIST NAME
+          url: '../static/audio/Piano Ghibli Collection 1.mp3', // PATH NAME AND SONG URL
+          cover: 'https://i.pinimg.com/736x/6e/48/e9/6e48e9a31e95f9c55f3ce80a2fb414c3.jpg' // COVER IMAGE
+      },
+    {
+      name: 'Liquid Time',
+      artist: 'Artist Name',
+      url: 'liquid_time.mp3',
+      cover: 'https://images.pexels.com/photos/838696/pexels-photo-838696.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    },
+    {
+      name: 'Silky Smooth',
+      artist: 'Artist Name',
+      url: 'silky_smooth.mp3',
+      cover: 'https://images.pexels.com/photos/1370545/pexels-photo-1370545.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    },
+    {
+      name: 'Silky Smooth',
+      artist: 'Artist Name',
+      url: 'silky_smooth.mp3',
+      cover: 'https://images.pexels.com/photos/1370545/pexels-photo-1370545.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    },
+    {
+      name: 'Silky Smooth',
+      artist: 'Artist Name',
+      url: 'silky_smooth.mp3',
+      cover: 'https://images.pexels.com/photos/1370545/pexels-photo-1370545.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+    },
+
+
+      ]
+  });
+
+
+// Array of image URLs corresponding to each song
+var backgroundImageUrls = [
+    'https://i.pinimg.com/736x/6e/48/e9/6e48e9a31e95f9c55f3ce80a2fb414c3.jpg',
+    'https://example.com/image2.jpg',
+    'https://example.com/image3.jpg',
+    // Add more URLs as needed, corresponding to each song
+];
+
+$("li").on('click', function(e){
+  var coverImageUrl = $('.aplayer-pic').css('background-image');
+  console.log(coverImageUrl);
+    // Use dataSwitchId to select the appropriate image URL
+    // Change the src attribute of the img tag gradually
+    $('.u-section-1 .u-image-1').animate({
+        opacity: 0.25 // Change opacity to 0.25 (25%)
+    }, 500, function() {
+        // Animation complete.
+        $(this).css('background-image', coverImageUrl);
+    }).animate({
+        opacity: 1 // Change opacity back to 1 (100%)
+    }, 500);
+});
+
+
+
+</script>
+</body></html>

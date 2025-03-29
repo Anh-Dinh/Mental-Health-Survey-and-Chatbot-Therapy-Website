@@ -1,0 +1,11 @@
+flask
+openai
+pandas
+numpy
+matplotlib
+plotly
+textblob
+wordcloud
+scikit-learn
+python-dotenv
+gunicorn

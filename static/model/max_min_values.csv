@@ -1,0 +1,37 @@
+,max,min
+Q3A,3.0,0.0
+Q5A,3.0,0.0
+Q10A,3.0,0.0
+Q13A,3.0,0.0
+Q16A,3.0,0.0
+Q17A,3.0,0.0
+Q21A,3.0,0.0
+Q24A,3.0,0.0
+Q26A,3.0,0.0
+Q31A,3.0,0.0
+Q34A,3.0,0.0
+Q37A,3.0,0.0
+Q38A,3.0,0.0
+Q42A,3.0,0.0
+Extraverted-enthusiastic,7.0,1.0
+Critical-quarrelsome,7.0,1.0
+Dependable-self_disciplined,7.0,1.0
+Anxious-easily upset,7.0,1.0
+Open to new experiences-complex,7.0,1.0
+Reserved-quiet,7.0,1.0
+Sympathetic-warm,7.0,1.0
+Disorganized-careless,7.0,1.0
+Calm-emotionally_stable,7.0,1.0
+Conventional-uncreative,7.0,1.0
+education,4.0,1.0
+urban,3.0,1.0
+gender,3.0,1.0
+engnat,3.0,1.0
+hand,3.0,1.0
+religion,12.0,1.0
+orientation,5.0,1.0
+race,70.0,10.0
+voted,3.0,1.0
+married,3.0,1.0
+familysize,133.0,1.0
+Age_Groups,4.0,1.0

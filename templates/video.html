@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        .custom-video::-webkit-media-controls {
+  display: none !important; /* Hide default controls on WebKit browsers */
+}
+
+.custom-video::-webkit-media-controls-enclosure {
+  overflow: hidden !important; /* Hide default controls on WebKit browsers */
+}
+
+.custom-video::-webkit-media-controls-panel {
+  width: calc(100% + 40px); /* Adjust panel width to cover the full video area */
+  margin-left: -20px; /* Adjust margin to cover the full video area */
+  opacity: 0; /* Hide controls */
+  transition: opacity 0.3s ease; /* Add transition for smooth appearance */
+}
+
+.custom-video:hover::-webkit-media-controls-panel {
+  opacity: 1; /* Show controls on hover */
+}
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.custom-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the video covers the entire container */
+}
+
+.custom-video::-webkit-media-controls {
+  display: none !important; /* Hide default controls on WebKit browsers */
+}
+
+.custom-video::-webkit-media-controls-enclosure {
+  overflow: hidden !important; /* Hide default controls on WebKit browsers */
+}
+
+.custom-video::-webkit-media-controls-panel {
+  width: calc(100% + 40px); /* Adjust panel width to cover the full video area */
+  margin-left: -20px; /* Adjust margin to cover the full video area */
+  opacity: 0; /* Hide controls */
+  transition: opacity 0.3s ease; /* Add transition for smooth appearance */
+}
+
+.custom-video:hover::-webkit-media-controls-panel {
+  opacity: 1; /* Show controls on hover */
+}
+
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css"> <!-- Include your CSS file -->
+</head>
+<body>
+
+    <video autoplay muted loop controls class="custom-video">
+        <source src="../static/video/sunset.mp4" type="video/webm">
+        <!-- Add alternative video formats here -->
+        Your browser does not support the video tag.
+    </video>
+
+</body>
+</html>

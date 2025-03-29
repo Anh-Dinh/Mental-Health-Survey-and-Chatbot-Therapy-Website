@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Depression Prediction Test</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/menu-bar.css') }}" media="screen">
+
+<style>
+    /* CSS styles */
+    
+    .card {
+        font-family: 'Snell Roundhand', cursive;
+        border: 2px solid black;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 10px;
+        background: linear-gradient(89.9deg, rgb(208, 246, 255) 0.1%, rgb(255, 237, 237) 47.9%, rgb(255, 255, 231) 100.2%);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: rgb(5, 3, 3);
+        transition: transform 0.1s, box-shadow 0.1s, opacity 1s ; /* Add transition effects */
+    }
+
+
+    .card:hover {
+        opacity: 1;
+        transform: scale(1.003); /* Scale up the card on hover */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+    }
+
+    .card.checked {
+    opacity: 0.5; /* Set opacity to 0.2 when radio button is checked */
+}
+
+    .card p {
+        
+        font-weight: bold;
+        font-size: 25px;
+        text-align: center;
+    }
+
+    .card-item {
+        margin-top: 10px;
+        margin-left: 12%;
+    }
+
+    body {
+        background-image: url('../static/images/survey_background (4).jpg');
+        background-size: contain;
+    }
+
+    .circle {
+    background: lightblue;
+    width: 100px;
+    height: 100px;
+    background-color: greenyellow;
+}
+
+
+.submit-feedback {
+    @extend .center-content;
+	padding: 10px 30px;
+  font-size: 24px;
+  cursor: pointer;
+  
+	border-radius: 7px;
+	border-bottom-left-radius: 0;
+  
+	background-color: var(--feedback-secondary-color);
+	color: var(--feedback-primary-color);
+  
+	transition: all 0.3s;
+  
+	&:hover {
+		border-radius: 0px;
+    
+		color: var(--feedback-primary-color);
+		background-color: var(--background-color);
+		background-image: url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffacac' fill-opacity='0.4'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+		animation: animatedBackground 5s linear infinite alternate;
+	}
+}
+
+@keyframes animatedBackground {
+	from {
+		background-position: 0 0;
+	}
+	to {
+		background-position: 100% 0;
+	}
+}
+
+
+embed[src="../static/audio/slow_smooth_piano_jazz.mp3"] {
+    /* Add your styles here */
+    position: fixed; /* Position the element relative to the browser window */
+    top: 20px; /* Adjust the top position as needed */
+    left: 20px; /* Adjust the left position as needed */
+    width: 300px;
+    /* Add more styles as needed */
+  }
+
+
+</style>
+
+</head>
+
+<header>
+    <nav class = 'menu'>
+        <a href="{{url_for('index')}}">Home</a>
+        <a href="{{url_for('survey_main')}}" >Survey</a>
+        <a href="{{url_for('chatbot')}}">Chatbot</a>
+        <a href="{{url_for('music')}}">Music</a>
+        <a href="{{url_for('survey_intro')}}">Dashboard</a>
+        <a href="{{url_for('aboutus')}}">About us</a>
+        
+        <div class="animation start-home"></div>
+      </nav>
+</header>
+<body >
+    <audio controls loop autoplay style="position: fixed; top: 20px; left: 20px; width: 200px;">
+        <source src="../static/audio/Piano Ghibli Collection 1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    
+    <h1 style='text-align: center; font-size: 50px; font-family: cursive;'> Depression Survey </h1>
+
+    <form id="form-target" action="{{ url_for('Depression_survey') }}" method="POST"> 
+
+   
+    
+        <div class="col-6 win21 ">        
+
+        <div class="container">
+            <div class="card">
+            <p>I couldn't seem to experience any positive feeling at all.</p>
+            <div class="card-item" >
+                <input id="01" type="radio" name="q1" value="0" required></input>
+                <label for="01">Did not apply to me at all</label><br>
+                <input id="02" type="radio" name="q1" value="1"></input>
+                <label for="02">Applied to me to some degree, or some of the time</label><br>
+                <input id="03" type="radio" name="q1" value="2"></input>
+                <label for="03">Applied to me to a considerable degree, or a good part of the time</label><br>
+                <input id="04" type="radio" name="q1" value="3"></input>
+                <label for="04">Applied to me very much, or most of the time</label><br>
+            </div></div>
+            
+
+            <div class="card">
+                <p>I just couldn't seem to get going.</p>
+                <div class="card-item" >
+                    <input id="01" type="radio" name="q2" value="0" required></input>
+                    <label for="01">Did not apply to me at all</label><br>
+                    <input id="02" type="radio" name="q2" value="1"></input>
+                    <label for="02">Applied to me to some degree, or some of the time</label><br>
+                    <input id="03" type="radio" name="q2" value="2"></input>
+                    <label for="03">Applied to me to a considerable degree, or a good part of the time</label><br>
+                    <input id="04" type="radio" name="q2" value="3"></input>
+                    <label for="04">Applied to me very much, or most of the time</label><br>
+                </div></div>
+            <div class="card">
+                <p>I felt that I had nothing to look forward to</p>
+                <div class="card-item" >
+                    <input id="01" type="radio" name="q3" value="0" required></input>
+                    <label for="01">Did not apply to me at all</label><br>
+                    <input id="02" type="radio" name="q3" value="1"></input>
+                    <label for="02">Applied to me to some degree, or some of the time</label><br>
+                    <input id="03" type="radio" name="q3" value="2"></input>
+                    <label for="03">Applied to me to a considerable degree, or a good part of the time</label><br>
+                    <input id="04" type="radio" name="q3" value="3"></input>
+                    <label for="04">Applied to me very much, or most of the time</label><br>
+                </div></div>  
+            <div class="card">
+                <p>I felt sad and depressed</p>
+                <div class="card-item" >
+                    <input id="01" type="radio" name="q4" value="0" required></input>
+                    <label for="01">Did not apply to me at all</label><br>
+                    <input id="02" type="radio" name="q4" value="1"></input>
+                    <label for="02">Applied to me to some degree, or some of the time</label><br>
+                    <input id="03" type="radio" name="q4" value="2"></input>
+                    <label for="03">Applied to me to a considerable degree, or a good part of the time</label><br>
+                    <input id="04" type="radio" name="q4" value="3"></input>
+                    <label for="04">Applied to me very much, or most of the time</label><br>
+                </div></div>           
+            <div class="card">
+                <p>I felt that I had lost interest in just about everything</p>
+                <div class="card-item" >
+                    <input id="01" type="radio" name="q5" value="0" required></input>
+                    <label for="01">Did not apply to me at all</label><br>
+                    <input id="02" type="radio" name="q5" value="1"></input>
+                    <label for="02">Applied to me to some degree, or some of the time</label><br>
+                    <input id="03" type="radio" name="q5" value="2"></input>
+                    <label for="03">Applied to me to a considerable degree, or a good part of the time</label><br>
+                    <input id="04" type="radio" name="q5" value="3"></input>
+                    <label for="04">Applied to me very much, or most of the time</label><br>
+                </div></div>   
+            <div class="card">
+                <p>I felt I wasn't worth much as a person</p>
+                <div class="card-item" >
+                    <input id="01" type="radio" name="q6" value="0" required></input>
+                    <label for="01">Did not apply to me at all</label><br>
+                    <input id="02" type="radio" name="q6" value="1"></input>
+                    <label for="02">Applied to me to some degree, or some of the time</label><br>
+                    <input id="03" type="radio" name="q6" value="2"></input>
+                    <label for="03">Applied to me to a considerable degree, or a good part of the time</label><br>
+                    <input id="04" type="radio" name="q6" value="3"></input>
+                    <label for="04">Applied to me very much, or most of the time</label><br>
+                </div></div>      
+            <div class="card">
+                <p>I felt that life wasn't worthwhile</p>
+                <div class="card-item" >
+                    <input id="01" type="radio" name="q7" value="0" required></input>
+                    <label for="01">Did not apply to me at all</label><br>
+                    <input id="02" type="radio" name="q7" value="1"></input>
+                    <label for="02">Applied to me to some degree, or some of the time</label><br>
+                    <input id="03" type="radio" name="q7" value="2"></input>
+                    <label for="03">Applied to me to a considerable degree, or a good part of the time</label><br>
+                    <input id="04" type="radio" name="q7" value="3"></input>
+                    <label for="04">Applied to me very much, or most of the time</label><br>
+                </div></div> 
+            <div class="card">
+                <p>I couldn't seem to get any enjoyment out of the things I did.</p>
+                <div class="card-item" >
+                    <input id="01" type="radio" name="q8" value="0" required></input>
+                    <label for="01">Did not apply to me at all</label><br>
+                    <input id="02" type="radio" name="q8" value="1"></input>
+                    <label for="02">Applied to me to some degree, or some of the time</label><br>
+                    <input id="03" type="radio" name="q8" value="2"></input>
+                    <label for="03">Applied to me to a considerable degree, or a good part of the time</label><br>
+                    <input id="04" type="radio" name="q8" value="3"></input>
+                    <label for="04">Applied to me very much, or most of the time</label><br>
+                </div></div> 
+            <div class="card">
+                <p>I felt down-hearted and blue</p>
+                <div class="card-item" >
+                    <input id="01" type="radio" name="q9" value="0" required></input>
+                    <label for="01">Did not apply to me at all</label><br>
+                    <input id="02" type="radio" name="q9" value="1"></input>
+                    <label for="02">Applied to me to some degree, or some of the time</label><br>
+                    <input id="03" type="radio" name="q9" value="2"></input>
+                    <label for="03">Applied to me to a considerable degree, or a good part of the time</label><br>
+                    <input id="04" type="radio" name="q9" value="3"></input>
+                    <label for="04">Applied to me very much, or most of the time</label><br>
+                </div></div> 
+            <div class="card">
+                <p>I was unable to become enthusiastic about anything</p>
+                <div class="card-item" >
+                    <input id="01" type="radio" name="q10" value="0" required></input>
+                    <label for="01">Did not apply to me at all</label><br>
+                    <input id="02" type="radio" name="q10" value="1"></input>
+                    <label for="02">Applied to me to some degree, or some of the time</label><br>
+                    <input id="03" type="radio" name="q10" value="2"></input>
+                    <label for="03">Applied to me to a considerable degree, or a good part of the time</label><br>
+                    <input id="04" type="radio" name="q10" value="3"></input>
+                    <label for="04">Applied to me very much, or most of the time</label><br>
+                </div></div> 
+            <div class="card">
+                <p>I felt I was pretty worthless.</p>
+                <div class="card-item" >
+                    <input id="01" type="radio" name="q11" value="0" required></input>
+                    <label for="01">Did not apply to me at all</label><br>
+                    <input id="02" type="radio" name="q11" value="1"></input>
+                    <label for="02">Applied to me to some degree, or some of the time</label><br>
+                    <input id="03" type="radio" name="q11" value="2"></input>
+                    <label for="03">Applied to me to a considerable degree, or a good part of the time</label><br>
+                    <input id="04" type="radio" name="q11" value="3"></input>
+                    <label for="04">Applied to me very much, or most of the time</label><br>
+                </div></div> 
+            <div class="card">
+                <p>I could see nothing in the future to be hopeful about</p>
+                <div class="card-item" >
+                    <input id="01" type="radio" name="q12" value="0" required></input>
+                    <label for="01">Did not apply to me at all</label><br>
+                    <input id="02" type="radio" name="q12" value="1"></input>
+                    <label for="02">Applied to me to some degree, or some of the time</label><br>
+                    <input id="03" type="radio" name="q12" value="2"></input>
+                    <label for="03">Applied to me to a considerable degree, or a good part of the time</label><br>
+                    <input id="04" type="radio" name="q12" value="3"></input>
+                    <label for="04">Applied to me very much, or most of the time</label><br>
+                </div></div> 
+            <div class="card">
+                <p>I felt that life was meaningless</p>
+                <div class="card-item" >
+                    <input id="01" type="radio" name="q13" value="0" required></input>
+                    <label for="01">Did not apply to me at all</label><br>
+                    <input id="02" type="radio" name="q13" value="1"></input>
+                    <label for="02">Applied to me to some degree, or some of the time</label><br>
+                    <input id="03" type="radio" name="q13" value="2"></input>
+                    <label for="03">Applied to me to a considerable degree, or a good part of the time</label><br>
+                    <input id="04" type="radio" name="q13" value="3"></input>
+                    <label for="04">Applied to me very much, or most of the time</label><br>
+                </div></div>
+            <div class="card">
+                <p>I found it difficult to work up the initiative to do things</p>
+                <div class="card-item" >
+                    <input id="01" type="radio" name="q14" value="0" required></input>
+                    <label for="01">Did not apply to me at all</label><br>
+                    <input id="02" type="radio" name="q14" value="1"></input>
+                    <label for="02">Applied to me to some degree, or some of the time</label><br>
+                    <input id="03" type="radio" name="q14" value="2"></input>
+                    <label for="03">Applied to me to a considerable degree, or a good part of the time</label><br>
+                    <input id="04" type="radio" name="q14" value="3"></input>
+                    <label for="04">Applied to me very much, or most of the time</label><br>
+                </div></div>
+            
+            <h3 style="text-align: center; font-size: 30px; font-family: 'Courier New', Courier, monospace;">I see myself as</h3>
+            <div class="card">
+                <p>Extraverted, enthusiastic</p>
+                <div class="card-item" style=" margin-right: 20%;" >
+                    <span>Totally Disagree</span>
+                    <input id="01" type="radio" name="q15" value="1" required class="circle" style="height: 100px; width: 100px;"></input>
+                 <!-- <label for="01">Disagree strongly</label><br> -->
+                    <input id="02" type="radio" name="q15" value="2" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="02">Disagree moderately</label><br> -->
+                    <input id="03" type="radio" name="q15" value="3" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="03">Disagree a little</label><br> -->
+                    <input id="04" type="radio" name="q15" value="4" class="circle" style="height: 50px; width: 50px;"></input>
+                    <!-- <label for="04">Neither agree nor disagree</label><br> -->
+                    <input id="05" type="radio" name="q15" value="5" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="05">Agree a little</label><br> -->
+                    <input id="06" type="radio" name="q15" value="6" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="06">Agree moderately</label><br> -->
+                    <input id="07" type="radio" name="q15" value="7" class="circle" style="height: 100px; width: 100px;"></input>
+                    <span> Totally Agree</span> 
+                    <span style="margin-left: 47%;"> Neutral</span>
+                    <!-- <label for="07">Agree strongly</label><br> -->
+                </div></div>
+            <div class="card">
+                <p>Critical, quarrelsome</p>
+                <div class="card-item" style=" margin-right: 20%;" >
+                    <span>Totally Disagree</span>
+                    <input id="01" type="radio" name="q16" value="1" required class="circle" style="height: 100px; width: 100px;"></input>
+                 <!-- <label for="01">Disagree strongly</label><br> -->
+                    <input id="02" type="radio" name="q16" value="2" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="02">Disagree moderately</label><br> -->
+                    <input id="03" type="radio" name="q16" value="3" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="03">Disagree a little</label><br> -->
+                    <input id="04" type="radio" name="q16" value="4" class="circle" style="height: 50px; width: 50px;"></input>
+                    <!-- <label for="04">Neither agree nor disagree</label><br> -->
+                    <input id="05" type="radio" name="q16" value="5" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="05">Agree a little</label><br> -->
+                    <input id="06" type="radio" name="q16" value="6" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="06">Agree moderately</label><br> -->
+                    <input id="07" type="radio" name="q16" value="7" class="circle" style="height: 100px; width: 100px;"></input>
+                    <span> Totally Agree</span> 
+                    <span style="margin-left: 47%;"> Neutral</span>
+                    <!-- <label for="07">Agree strongly</label><br> -->
+                </div></div>
+            <div class="card">
+                <p>Dependable, self-disciplined</p>
+                <div class="card-item" style=" margin-right: 20%;" >
+                    <span>Totally Disagree</span>
+                    <input id="01" type="radio" name="q17" value="1" required class="circle" style="height: 100px; width: 100px;"></input>
+                 <!-- <label for="01">Disagree strongly</label><br> -->
+                    <input id="02" type="radio" name="q17" value="2" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="02">Disagree moderately</label><br> -->
+                    <input id="03" type="radio" name="q17" value="3" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="03">Disagree a little</label><br> -->
+                    <input id="04" type="radio" name="q17" value="4" class="circle" style="height: 50px; width: 50px;"></input>
+                    <!-- <label for="04">Neither agree nor disagree</label><br> -->
+                    <input id="05" type="radio" name="q17" value="5" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="05">Agree a little</label><br> -->
+                    <input id="06" type="radio" name="q17" value="6" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="06">Agree moderately</label><br> -->
+                    <input id="07" type="radio" name="q17" value="7" class="circle" style="height: 100px; width: 100px;"></input>
+                    <span> Totally Agree</span> 
+                    <span style="margin-left: 47%;"> Neutral</span>
+                    <!-- <label for="07">Agree strongly</label><br> -->
+                </div></div>    
+            <div class="card">
+                <p>Anxious, easily upset</p>
+                <div class="card-item" style=" margin-right: 20%;" >
+                    <span>Totally Disagree</span>
+                    <input id="01" type="radio" name="q18" value="1" required class="circle" style="height: 100px; width: 100px;"></input>
+                 <!-- <label for="01">Disagree strongly</label><br> -->
+                    <input id="02" type="radio" name="q18" value="2" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="02">Disagree moderately</label><br> -->
+                    <input id="03" type="radio" name="q18" value="3" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="03">Disagree a little</label><br> -->
+                    <input id="04" type="radio" name="q18" value="4" class="circle" style="height: 50px; width: 50px;"></input>
+                    <!-- <label for="04">Neither agree nor disagree</label><br> -->
+                    <input id="05" type="radio" name="q18" value="5" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="05">Agree a little</label><br> -->
+                    <input id="06" type="radio" name="q18" value="6" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="06">Agree moderately</label><br> -->
+                    <input id="07" type="radio" name="q18" value="7" class="circle" style="height: 100px; width: 100px;"></input>
+                    <span> Totally Agree</span> 
+                    <span style="margin-left: 47%;"> Neutral</span>
+                    <!-- <label for="07">Agree strongly</label><br> -->
+                </div></div>     
+            <div class="card">
+                <p>Open to new experiences, complex</p>
+                <div class="card-item" style=" margin-right: 20%;" >
+                    <span>Totally Disagree</span>
+                    <input id="01" type="radio" name="q19" value="1" required class="circle" style="height: 100px; width: 100px;"></input>
+                 <!-- <label for="01">Disagree strongly</label><br> -->
+                    <input id="02" type="radio" name="q19" value="2" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="02">Disagree moderately</label><br> -->
+                    <input id="03" type="radio" name="q19" value="3" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="03">Disagree a little</label><br> -->
+                    <input id="04" type="radio" name="q19" value="4" class="circle" style="height: 50px; width: 50px;"></input>
+                    <!-- <label for="04">Neither agree nor disagree</label><br> -->
+                    <input id="05" type="radio" name="q19" value="5" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="05">Agree a little</label><br> -->
+                    <input id="06" type="radio" name="q19" value="6" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="06">Agree moderately</label><br> -->
+                    <input id="07" type="radio" name="q19" value="7" class="circle" style="height: 100px; width: 100px;"></input>
+                    <span> Totally Agree</span> 
+                    <span style="margin-left: 47%;"> Neutral</span>
+                    <!-- <label for="07">Agree strongly</label><br> -->
+                </div></div>
+            <div class="card">
+                <p>Reserved, quiet</p>
+                <div class="card-item" style=" margin-right: 20%;" >
+                    <span>Totally Disagree</span>
+                    <input id="01" type="radio" name="q20" value="1" required class="circle" style="height: 100px; width: 100px;"></input>
+                 <!-- <label for="01">Disagree strongly</label><br> -->
+                    <input id="02" type="radio" name="q20" value="2" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="02">Disagree moderately</label><br> -->
+                    <input id="03" type="radio" name="q20" value="3" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="03">Disagree a little</label><br> -->
+                    <input id="04" type="radio" name="q20" value="4" class="circle" style="height: 50px; width: 50px;"></input>
+                    <!-- <label for="04">Neither agree nor disagree</label><br> -->
+                    <input id="05" type="radio" name="q20" value="5" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="05">Agree a little</label><br> -->
+                    <input id="06" type="radio" name="q20" value="6" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="06">Agree moderately</label><br> -->
+                    <input id="07" type="radio" name="q20" value="7" class="circle" style="height: 100px; width: 100px;"></input>
+                    <span> Totally Agree</span> 
+                    <span style="margin-left: 47%;"> Neutral</span>
+                    <!-- <label for="07">Agree strongly</label><br> -->
+                </div></div>
+            <div class="card">
+                <p>Sympathetic, warm</p>
+                <div class="card-item" style=" margin-right: 20%;" >
+                    <span>Totally Disagree</span>
+                    <input id="01" type="radio" name="q21" value="1" required class="circle" style="height: 100px; width: 100px;"></input>
+                 <!-- <label for="01">Disagree strongly</label><br> -->
+                    <input id="02" type="radio" name="q21" value="2" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="02">Disagree moderately</label><br> -->
+                    <input id="03" type="radio" name="q21" value="3" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="03">Disagree a little</label><br> -->
+                    <input id="04" type="radio" name="q21" value="4" class="circle" style="height: 50px; width: 50px;"></input>
+                    <!-- <label for="04">Neither agree nor disagree</label><br> -->
+                    <input id="05" type="radio" name="q21" value="5" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="05">Agree a little</label><br> -->
+                    <input id="06" type="radio" name="q21" value="6" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="06">Agree moderately</label><br> -->
+                    <input id="07" type="radio" name="q21" value="7" class="circle" style="height: 100px; width: 100px;"></input>
+                    <span> Totally Agree</span> 
+                    <span style="margin-left: 47%;"> Neutral</span>
+                    <!-- <label for="07">Agree strongly</label><br> -->
+                </div></div>
+            <div class="card">
+                <p>Disorganized, careless</p>
+                <div class="card-item" style=" margin-right: 20%;" >
+                    <span>Totally Disagree</span>
+                    <input id="01" type="radio" name="q22" value="1" required class="circle" style="height: 100px; width: 100px;"></input>
+                 <!-- <label for="01">Disagree strongly</label><br> -->
+                    <input id="02" type="radio" name="q22" value="2" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="02">Disagree moderately</label><br> -->
+                    <input id="03" type="radio" name="q22" value="3" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="03">Disagree a little</label><br> -->
+                    <input id="04" type="radio" name="q22" value="4" class="circle" style="height: 50px; width: 50px;"></input>
+                    <!-- <label for="04">Neither agree nor disagree</label><br> -->
+                    <input id="05" type="radio" name="q22" value="5" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="05">Agree a little</label><br> -->
+                    <input id="06" type="radio" name="q22" value="6" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="06">Agree moderately</label><br> -->
+                    <input id="07" type="radio" name="q22" value="7" class="circle" style="height: 100px; width: 100px;"></input>
+                    <span> Totally Agree</span> 
+                    <span style="margin-left: 47%;"> Neutral</span>
+                    <!-- <label for="07">Agree strongly</label><br> -->
+                </div></div>
+            <div class="card">
+                <p>Calm, emotionally stable</p>
+                <div class="card-item" style=" margin-right: 20%;" >
+                    <span>Totally Disagree</span>
+                    <input id="01" type="radio" name="q23" value="1" required class="circle" style="height: 100px; width: 100px;"></input>
+                 <!-- <label for="01">Disagree strongly</label><br> -->
+                    <input id="02" type="radio" name="q23" value="2" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="02">Disagree moderately</label><br> -->
+                    <input id="03" type="radio" name="q23" value="3" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="03">Disagree a little</label><br> -->
+                    <input id="04" type="radio" name="q23" value="4" class="circle" style="height: 50px; width: 50px;"></input>
+                    <!-- <label for="04">Neither agree nor disagree</label><br> -->
+                    <input id="05" type="radio" name="q23" value="5" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="05">Agree a little</label><br> -->
+                    <input id="06" type="radio" name="q23" value="6" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="06">Agree moderately</label><br> -->
+                    <input id="07" type="radio" name="q23" value="7" class="circle" style="height: 100px; width: 100px;"></input>
+                    <span> Totally Agree</span> 
+                    <span style="margin-left: 47%;"> Neutral</span>
+                    <!-- <label for="07">Agree strongly</label><br> -->
+                </div></div>
+            <div class="card">
+                <p>Conventional, uncreative</p>
+                <div class="card-item" style=" margin-right: 20%;" >
+                    <span>Totally Disagree</span>
+                    <input id="01" type="radio" name="q24" value="1" required class="circle" style="height: 100px; width: 100px;"></input>
+                 <!-- <label for="01">Disagree strongly</label><br> -->
+                    <input id="02" type="radio" name="q24" value="2" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="02">Disagree moderately</label><br> -->
+                    <input id="03" type="radio" name="q24" value="3" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="03">Disagree a little</label><br> -->
+                    <input id="04" type="radio" name="q24" value="4" class="circle" style="height: 50px; width: 50px;"></input>
+                    <!-- <label for="04">Neither agree nor disagree</label><br> -->
+                    <input id="05" type="radio" name="q24" value="5" class="circle" style="height: 60px; width: 60px;"></input>
+                    <!-- <label for="05">Agree a little</label><br> -->
+                    <input id="06" type="radio" name="q24" value="6" class="circle" style="height: 80px; width: 80px;"></input>
+                    <!-- <label for="06">Agree moderately</label><br> -->
+                    <input id="07" type="radio" name="q24" value="7" class="circle" style="height: 100px; width: 100px;"></input>
+                    <span> Totally Agree</span> 
+                    <span style="margin-left: 47%;"> Neutral</span>
+                    <!-- <label for="07">Agree strongly</label><br> -->
+                </div></div>
+            </div>
+
+            </div>
+        
+            <div class="card" >
+                <h3 style="text-align: center;">Some background information</h3>
+            <div style="margin-left: 25%;">
+            
+                <label for="edu">How much education have you completed?</label>
+                <select id="edu" name="edu">
+                  <option value="1">Less than high school</option>
+                  <option value="2">High school</option>
+                  <option value="3">University degree</option>
+                  <option value="4">Graduate degree</option>
+                </select>
+                <br>
+                <label for="urban">What type of area did you live when you were a child?<label>
+                <select id="urban" name="urban">
+                  <option value="1">Rural (country side)</option>
+                  <option value="2">Suburban</option>
+                  <option value="3">Urban</option>
+                </select>
+                <br>
+                <label for="gender">What is your gender?<label>
+                    <select id="gender" name="gender">
+                      <option value="1">Male</option>
+                      <option value="2">Female</option>
+                      <option value="3">Other</option>
+                    </select>                
+                <br>        
+                <label for="eng">Is English your native language?<label>
+                    <select id="eng" name="eng">
+                      <option value="1">Yes</option>
+                      <option value="2">No</option>
+                    </select>                
+                <br>       
+                <label for="age">Age</label>
+                <input type="text" id="age" name="age">
+                <br>
+                <label for="hand">What hand do you use to write with?<label>
+                    <select id="hand" name="hand">
+                      <option value="1">Right</option>
+                      <option value="2">Left</option>
+                      <option value="3">Both</option>
+                    </select>                
+                <br>   
+                <label for="religion">What is your religion?<label>
+                    <select id="religion" name="religion">
+                      <option value="1">Agnostic</option>
+                      <option value="2">Atheist</option>
+                      <option value="3">Buddhist</option>
+                      <option value="4">Christian(Catholic)</option>
+                      <option value="5">Christian (Mormon)</option>
+                      <option value="6">Christian (Protestant)</option>
+                      <option value="7">Christian (Other)</option>
+                      <option value="8">Hindu</option>
+                      <option value="9">Jewish</option>
+                      <option value="10">CMuslim</option>
+                      <option value="11">Sikh</option>
+                      <option value="12">Other</option>
+                    </select>                
+                <br>                              
+                <label for="orientation">What is your sexual orientation?<label>
+                    <select id="orientation" name="orientation">
+                      <option value="1">Heterosexual</option>
+                      <option value="2">Bisexual</option>
+                      <option value="3">Homosexual</option>
+                      <option value="4">Asexual</option>
+                      <option value="5">Other</option>
+                    </select>                
+                <br> 
+                <label for="race">What is your race?<label>
+                    <select id="race" name="race">
+                      <option value='10'>Asian</option>
+                      <option value="20">Arab</option>
+                      <option value="30">Black</option>
+                      <option value="40">Indigenous Australian</option>
+                      <option value="50">Native American</option>
+                      <option value="60">White</option>
+                      <option value="70">Other</option>
+                    </select>                
+                <br> 
+                <label for="voted">Have you voted in a national election in the past year?<label>
+                    <select id="voted" name="voted">
+                      <option value="1">Yes</option>
+                      <option value="2">No</option>
+                    </select>                
+                <br> 
+                <label for="married">What is your marital status?<label>
+                    <select id="married" name="married">
+                      <option value="1">Never married</option>
+                      <option value="2">Currently married</option>
+                      <option value="3">Previously married</option>
+                    </select>                
+                <br> 
+                <label for="familysize">Including you, how many children did your mother have?<label>
+                <input type="text" id="familysize" name="familysize">
+                <br>
+                <label for="major">If you attended a university, what was your major?<label>
+                <input type="text" id="major" name="major">
+            </div>
+            </div>
+    
+
+        <div style="display: flex; justify-content: center;" >
+        <input class="button  submit-feedback" type="submit"/>
+        </div>    
+    </div>
+    </form>
+    <div id="prediction-div" class="card">
+        <!-- This div will hold the prediction -->
+        {% if prediction %}
+            <p>Predicion: {{ prediction }}</p>
+            <br>
+            <p>Our Tip: {{response}}</p>
+        {% endif %}
+    </div>
+
+    <!---Footer-->
+    <div class="row footer">
+      <!---Contact Form----------------------->
+<!---Contact Form----------------------->
+
+
+        </div>
+      </div>
+      <div class="contact-info col-md-6 mt-4 card">
+        <div class="mt-3 px-4">
+          <div class="h5">Why you should fill this form?</div>
+          <br><p id="contact_text">The data you will provide, will be used for training the model for more accurate predictions. Once trained, we will discard your provided details safely.</p>
+          <p>Thank You!</p>
+      </div>
+    </div>
+  </div>
+  <div class="row credit" id="credit">
+    <p>Made with 🤍 by Our Team</p>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+      $(document).ready(function(){
+          $('form').submit(function(event){
+              // Prevent the default form submission
+              event.preventDefault();
+              
+              // Serialize form data
+              var formData = $(this).serialize();
+              
+              // Send AJAX POST request to server
+              $.ajax({
+                  url: '/Depression_survey',
+                  type: 'POST',
+                  data: formData,
+                  success: function(data){
+                      // Update the prediction div with received data
+                      $('#prediction-div').html("<p>Prediction: " + data.prediction + "</p> <p> Our Tip: " + data.response + "</p> " + "<p> Let's talk with our  <a href='{{url_for('chatbot')}}'>Chatbot</a> </p>");
+
+                  },
+                  error: function(){
+                      alert('Error occurred while fetching prediction.');
+                  }
+              });
+          });
+      });
+
+
+
+      document.querySelectorAll('.card input[type="radio"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+        if (this.checked) {
+            this.closest('.card').classList.add('checked');
+        } else {
+            this.closest('.card').classList.remove('checked');
+        }
+    });
+});
+
+  </script>
+   
+
+</body>
+</html>
